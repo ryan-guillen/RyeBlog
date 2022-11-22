@@ -1,30 +1,37 @@
-const apiCall = async () => {
-    const res = await fetch(`http://localhost:8080/account`, { // add
-        method: 'POST',
+type Post = {
+    username: string;
+    title: string;
+    text: string
+}
+
+const getPosts = async () => {
+    const res = await fetch(`http://localhost:8080/post`, { // add
+        method: 'GET',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({'username': 'user 5', 'bio':'hi'}),
         next: { revalidate: 5 }
     });
-    
-   
-
-    
-    const data = await res.json();
+    const data: Post[] = await res.json();
     console.log(data);
     return data;
     
 }
 
-
 const Posts = async () => {
-    const r = await apiCall();
+    const posts = await getPosts();
 
     return (
         <div>
-            In Posts
-            <button>call API</button>
+            <div className='flex'>
+                {posts.map((post: Post) => (
+                    <div className='bg-blue-400 w-56 h-56 my-2 mx-2 rounded-md text-center'>
+                        <p>{post.username}</p>
+                        <p>{post.title}</p>
+                        <p>{post.text}</p>
+                    </div>
+                ))}
+            </div>
         </div>
     )
 }

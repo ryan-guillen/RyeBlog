@@ -26,7 +26,7 @@ const User = async ({ params: { userId } }: PageProps) => {
         <div>
             <div className='flex'>
                 {all.map((post: Post) => (
-                    <div className='bg-blue-400 w-56 h-56 my-2 mx-2 overflow-ellipsis rounded-md text-center'>
+                    <div className='bg-blue-400 w-56 h-56 my-2 mx-2 rounded-md text-center'>
                         <p>{post.username}</p>
                         <p>{post.title}</p>
                         <p>{post.text}</p>
