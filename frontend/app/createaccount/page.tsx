@@ -25,10 +25,10 @@ const CreateAccount = () => {
         <div className='block fixed w-full h-full overflow-auto bg-black/50'>
             <div className='mx-auto my-12 text-center w-1/2 h-1/4 bg-slate-400 rounded-lg'>
                 <form onSubmit={attemptCreateAccount} className='space-y-2'>
-                    <input type='text' value={username} placeholder='Enter username...'
+                    <input type='text' value={username} placeholder='Enter username...' maxLength={20}
                         onChange={(e) => setUsername(e.target.value)}>         
                     </input> <br />
-                    <input type='text' value={bio} placeholder='Enter bio...' 
+                    <input type='text' value={bio} placeholder='Enter bio...' maxLength={60}
                         onChange={(e) => setBio(e.target.value)}>
                     </input> <br />
                     <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-lg'>

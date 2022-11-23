@@ -6,11 +6,10 @@ type Account = {
 }
 
 const fetchUsers = async () => {
-    const res = await fetch(`http://localhost:8080/account`, {
+    const res = await fetch('http://localhost:8080/account', {
         next: { revalidate: 20 },
     });
     const data: Account[] = await res.json();
-    console.log(data);
     return data;
 }
 
@@ -21,7 +20,7 @@ const Page = async () => {
         <div>
             <div className='flex'>
                 {all.map((user: Account) => (
-                    <div className='bg-blue-400 w-56 h-56 my-2 mx-2 rounded-md text-center'>
+                    <div className='bg-blue-400 w-56 h-56 my-2 mx-2 rounded-md text-center' key={user.username}>
                         <Link href={`/users/${user.username}`}>{user.username}</Link>
                         <p className='text-ellipsis overflow-hidden'>{user.bio}</p>
                     </div>

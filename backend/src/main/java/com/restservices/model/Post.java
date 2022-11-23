@@ -19,6 +19,9 @@ public class Post {
         this.text = text;
     }
 
+    public String getId() {
+        return id;
+    }
     public String getUsername() {
         return username;
     }

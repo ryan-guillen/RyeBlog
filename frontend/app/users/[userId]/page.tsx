@@ -1,38 +1,45 @@
+import Link from 'next/link'
+
 type PageProps = {
     params: {
         userId: string;
     }
 }
 
-type Post = {
+type PostType = {
+    id: string
     username: string;
     title: string;
     text: string;
 }
 
-const fetchPosts = async (username: string) => {
+const getPosts = async (username: string) => {
     const res = await fetch(`http://localhost:8080/post/account/${username}`, {
-        next: { revalidate: 20 },
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        next: { revalidate: 5 }
     });
-    const data: Post[] = await res.json();
-    console.log(data);
-    return data;
+    let data: PostType[] = await res.json();
+    if (data.length > 1) data = data.reverse(); // Newest posts first
+    return data;  
 }
 
-
 const User = async ({ params: { userId } }: PageProps) => {
-    let all = await fetchPosts(userId);
+    let all = await getPosts(userId);
+    
     return (
-        <div>
-            <div className='flex'>
-                {all.map((post: Post) => (
-                    <div className='bg-blue-400 w-56 h-56 my-2 mx-2 rounded-md text-center'>
-                        <p>{post.username}</p>
-                        <p>{post.title}</p>
-                        <p>{post.text}</p>
+        <div className='flex flex-col items-center'>
+            {all.map((post: PostType) => (
+                <div className='flex-1 bg-blue-400 w-1/2 h-32 my-2 mx-2 rounded-md' key={post.id}>
+                    <h2 className='font-bold text-center'>{post.username}</h2>
+                    <div className='text-center w-full'>
+                        <Link href={`/posts/${post.id}`} className='border-b border-black hover:text-blue-900'>{post.title}</Link>
                     </div>
-                ))}
-            </div>
+                    {post.text} < br/>
+                </div>
+            ))}
         </div>
     )
 }
