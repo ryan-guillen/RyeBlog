@@ -1,8 +1,6 @@
 'use client'
 import { useState, FormEvent } from 'react';
 
-
-
 const CreateAccount = () => {
     const [username, setUsername] = useState<string>('');
     const [bio, setBio] = useState<string>('');

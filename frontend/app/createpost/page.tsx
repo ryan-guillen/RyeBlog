@@ -6,6 +6,7 @@ const CreatePost = () => {
     const [username, setUsername] = useState<string>('');
     const [title, setTitle] = useState<string>('');
     const [text, setText] = useState<string>('');
+    const [postStatus, setPostStatus] = useState<string>('');
     const router = useRouter();
 
     const attemptCreatePost = async (e: FormEvent<HTMLFormElement>) => {
@@ -21,9 +22,10 @@ const CreatePost = () => {
             },
             body: JSON.stringify({'username': username, 'title': title, 'text': text}),
             next: { revalidate: 1 },
-        }).then(() => router.push(`users/${username}`));
-
-        
+        }).then((res) => {
+            if (res.status == 201) setPostStatus('Post successfully made');
+            else if (res.status == 200) setPostStatus('Error. Was your username entered correctly?');
+        })
     }
 
     return (
@@ -41,12 +43,11 @@ const CreatePost = () => {
                     <textarea value={text} placeholder='Enter text...' className='w-11/12' maxLength={1500}
                         onChange={(e) => setText(e.target.value)}>
 
-                    </textarea> < br />
+                    </textarea> <br />
                     <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-lg'>
                         Create Post!
-                    </button>
-                    
-
+                    </button> <br />
+                    {postStatus}
                 </form>
             </div>
         </div>

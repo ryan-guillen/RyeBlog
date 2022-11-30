@@ -1,5 +1,9 @@
 # RyeBlog
 
-A small blog website I made to learn some new technologies.  
-The front end is made with next.js 13, TypeScript, and tailwind.  
+A small blog website I made to learn.  
+The front end is made with Next.js 13, TypeScript, and Tailwind.  
 The back end is made with Spring Boot and MongoDB.  
+
+backend/src/main/resources/application.properties is in .gitignore because it contains
+my login information for MongoDB. You will have to provide your own information to get
+this to work on your end.

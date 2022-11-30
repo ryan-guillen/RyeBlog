@@ -1,10 +1,11 @@
+### BACKEND ###
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
-### STS ###
+# STS
 .apt_generated
 .classpath
 .factorypath
@@ -13,15 +14,12 @@ target/
 .springBeans
 .sts4-cache
 
-### IntelliJ IDEA ###
+# IntelliJ IDEA
 .idea
 *.iws
 *.iml
 *.ipr
 /backend/src/main/resources/application.properties
-
-### VS Code ###
-.vscode/
 
 
 ### FRONTEND ###
