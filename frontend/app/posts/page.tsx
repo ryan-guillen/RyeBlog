@@ -25,7 +25,7 @@ const Posts = async () => {
     return (
         <div className='flex flex-col items-center'>
             {posts.map((post: Post) => (
-                <div className='bg-blue-400 w-1/2 h-56 my-2 mx-2 rounded-md' key={post.id}>
+                <div className='bg-blue-400 w-1/2 my-2 mx-2 rounded-md' key={post.id}>
                     <div className='text-center'>
                         <Link href={`users/${post.username}`} className='font-bold text-center text-3xl text-blue-900 hover:text-blue-700'>{post.username}</Link>
                     </div>

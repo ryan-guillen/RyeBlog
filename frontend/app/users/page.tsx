@@ -18,7 +18,7 @@ const Page = async () => {
     console.log(all);
     return (
         <div>
-            <div className='flex'>
+            <div className='flex overflow-auto'>
                 {all.map((user: Account) => (
                     <div className='bg-blue-400 w-56 h-56 my-2 mx-2 rounded-md text-center' key={user.username}>
                         <Link href={`/users/${user.username}`}>{user.username}</Link>
