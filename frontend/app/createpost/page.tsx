@@ -11,9 +11,9 @@ const CreatePost = () => {
 
     const attemptCreatePost = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (username == '') return 'You need to fill in all fields!'
-        if (title == '') return 'You need to fill in all fields!'
-        if (text == '') return 'You need to fill in all fields!'
+        if (username == '') return setPostStatus('You need to fill in all fields!');
+        if (title == '') return setPostStatus('You need to fill in all fields!');
+        if (text == '') return setPostStatus('You need to fill in all fields!');
 
         await fetch('http://localhost:8080/post', {
             method: 'POST',
@@ -21,7 +21,6 @@ const CreatePost = () => {
                 'Content-type': 'application/json',
             },
             body: JSON.stringify({'username': username, 'title': title, 'text': text}),
-            next: { revalidate: 1 },
         }).then((res) => {
             if (res.status == 201) setPostStatus('Post successfully made');
             else if (res.status == 200) setPostStatus('Error. Was your username entered correctly?');
@@ -46,9 +45,9 @@ const CreatePost = () => {
                     </textarea> <br />
                     <button type='submit' className='bg-blue-500 text-white px-4 py-2 rounded-lg'>
                         Create Post!
-                    </button> <br />
-                    {postStatus}
+                    </button>
                 </form>
+                {postStatus}
             </div>
         </div>
     )

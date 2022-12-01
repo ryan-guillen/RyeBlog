@@ -33,7 +33,7 @@ const Post = ({ params: { postId } }: PageProps) => {
         await fetch(`http://localhost:8080/post/${id}`, {
             method: 'DELETE'
         }).then(() => {
-            router.push(`/users/${username}`)
+            router.push(`users/${username}`)
             router.refresh();
             setPost({id: postId, username: username, title: '', text: 'The post has been deleted.'})
         }); 
@@ -48,6 +48,7 @@ const Post = ({ params: { postId } }: PageProps) => {
                 <p className='border-b border-black text-center w-full text-2xl pt-2'>{post.title}</p>
                 <p className='text-xl'>{post.text}</p>
                 <button onClick={() => deletePost(postId, post.username)} className='bg-red-400 px-5 py-1 rounded-lg'>Delete</button>
+                <Link href={`posts/${postId}/edit`} className='bg-green-400 px-5 py-1 rounded-lg'>Edit</Link>
             </div>
         </div>
     )

@@ -71,4 +71,16 @@ public class PostController {
         List<Post> posts = repo.findByUsername(username);
         return ResponseEntity.ok(posts);
     }
+
+    @PostMapping("/post/edit")
+    public ResponseEntity updatePost(@RequestBody Post updatedPost) {
+        Optional<Post> post = repo.findById(updatedPost.getId());
+        if (post.isPresent()) {
+            repo.save(updatedPost);
+            return ResponseEntity.status(201).body("Success");
+        }
+        else {
+            return ResponseEntity.status(200).body("Post not found.");
+        }
+    }
 }

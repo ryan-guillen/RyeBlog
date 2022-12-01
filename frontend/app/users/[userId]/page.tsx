@@ -19,7 +19,7 @@ const getPosts = async (username: string) => {
         headers: {
             'Content-Type': 'application/json'
         },
-        next: { revalidate: 5 }
+        next: { revalidate: 1 }
     });
     let data: PostType[] = await res.json();
     if (data.length > 1) data = data.reverse(); // Newest posts first
