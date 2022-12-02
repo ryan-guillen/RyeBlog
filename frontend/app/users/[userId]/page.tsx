@@ -33,11 +33,11 @@ const User = async ({ params: { userId } }: PageProps) => {
         <div className='flex flex-col items-center'>
             {all.map((post: PostType) => (
                 <div className='flex-1 bg-blue-400 w-1/2 h-32 my-2 mx-2 rounded-md' key={post.id}>
-                    <h2 className='font-bold text-center'>{post.username}</h2>
-                    <div className='text-center w-full'>
+                    <h2 className='font-bold text-center text-2xl'>{post.username}</h2>
+                    <div className='text-center w-full text-lg'>
                         <Link href={`/posts/${post.id}`} className='border-b border-black hover:text-blue-900'>{post.title}</Link>
                     </div>
-                    {post.text} < br/>
+                    <p className='text-lg'>{post.text}</p>
                 </div>
             ))}
         </div>

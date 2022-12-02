@@ -18,10 +18,10 @@ const Page = async () => {
     console.log(all);
     return (
         <div>
-            <div className='flex'>
+            <div className='flex overflow-auto'>
                 {all.map((user: Account) => (
                     <div className='bg-blue-400 w-56 h-56 my-2 mx-2 rounded-md text-center' key={user.username}>
-                        <Link href={`/users/${user.username}`}>{user.username}</Link>
+                        <Link href={`/users/${user.username}`} className='font-bold text-center text-xl text-blue-900 hover:text-blue-700'>{user.username}</Link>
                         <p className='text-ellipsis overflow-hidden'>{user.bio}</p>
                     </div>
                 ))}

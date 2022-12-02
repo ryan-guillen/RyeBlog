@@ -24,18 +24,22 @@ public class AccountController {
     }
 
     @PostMapping("/account")
-    public ResponseEntity<Account> createAccount(@RequestBody AccountRequest accountRequest) {
-        Account account = new Account();
-        account.setUsername(accountRequest.getUsername());
-        account.setBio(accountRequest.getBio());
+    public ResponseEntity createAccount(@RequestBody AccountRequest accountRequest) {
+        Optional<Account> account = repo.findById(accountRequest.getUsername());
+        if (account.isPresent()) {
+            return ResponseEntity.status(200).body("Failed");
+        }
+        Account newAccount = new Account();
+        newAccount.setUsername(accountRequest.getUsername());
+        newAccount.setBio(accountRequest.getBio());
 
-        return ResponseEntity.status(201).body(repo.save(account));
+        return ResponseEntity.status(201).body(repo.save(newAccount));
     }
 
     @GetMapping("/account/{id}")
     public ResponseEntity getAccountById(@PathVariable String id) {
         Optional<Account> account = repo.findById(id);
-        if(account.isPresent()) { // if account exists
+        if (account.isPresent()) { // if account exists
             return ResponseEntity.ok(account.get());
         }
         else {
